@@ -1,45 +1,34 @@
 <?php
+/*
+Plugin Name: 	WooHQ for BilahPro
+Plugin URI:		https://grouprint.my/woohq
+Description: 	Special plugin for BilahPro Imposition System users.
+Version: 		1.0.3
+Author: 		Grouprint Solutions
+Author URI: 	https://grouprint.my
+Text Domain: 	woohq
+License: 		GPL-2.0+
+License URI:	http://www.gnu.org/licenses/gpl-2.0.txt
+
+Copyright 2021 and beyond | Azudin (email : azudin.daem@gmail.com)
+*/
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
+}
+
 /**
- * WooHQ Plugin is the simplest WordPress plugin for beginner.
- * Take this as a base plugin and modify as per your need.
- *
- * @package WooHQ for BilahPro
- * @author Grouprint Solutions
- * @license GPL-2.0+
- * @link https://grouprint.my/woohq
- * @copyright 2021 Grouprint Solutions. All rights reserved.
- *
- *            @wordpress-plugin
- *            Plugin Name: WooHQ for BilahPro
- *            Plugin URI: https://grouprint.my/woohq
- *            Description: Special plugin for BilahPro Imposition System users.
- *            Version: 1.0.3
- *            Author: Grouprint Solutions
- *            Author URI: https://grouprint.my
- *            Text Domain: woohq
- *            Contributors: Grouprint Solutions
- *            License: GPL-2.0+
- *            License URI: http://www.gnu.org/licenses/gpl-2.0.txt
+ * Global variables
  */
+$woohq_plugin_version = '1.0.3';
+$plugin_file = plugin_basename(__FILE__);	
+define( 'WOOHQ_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
+define( 'WOOHQ_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 
-include_once('includes/license.php');
-include_once('includes/price_check.php');
+/**
+ * Includes - keeping it modular
+ */
+include( WOOHQ_PLUGIN_PATH . 'admin/admin-init.php' ); 
+include( WOOHQ_PLUGIN_PATH . 'includes/price_check.php' ); 
 
-add_filter( 'plugin_action_links_woohq/woohq.php', 'woohq_settings_link' );
-function woohq_settings_link( $links ) {
-	// Build and escape the URL.
-	$url = esc_url( add_query_arg(
-		'page',
-		'woohq',
-		get_admin_url() . 'admin.php'
-	) );
-	// Create the link.
-	$settings_link = "<a href='$url'>" . __( 'Settings' ) . '</a>';
-	// Adds the link to the end of the array.
-	array_unshift(
-		$links,
-		$settings_link
-	);
-	return $links;
-}//end woohq_settings_link()
 

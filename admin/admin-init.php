@@ -1,5 +1,23 @@
 <?php
 
+add_filter( 'plugin_action_links_woohq/woohq.php', 'woohq_settings_link' );
+function woohq_settings_link( $links ) {
+	// Build and escape the URL.
+	$url = esc_url( add_query_arg(
+		'page',
+		'woohq',
+		get_admin_url() . 'admin.php'
+	) );
+	// Create the link.
+	$settings_link = "<a href='$url'>" . __( 'Settings' ) . '</a>';
+	// Adds the link to the end of the array.
+	array_unshift(
+		$links,
+		$settings_link
+	);
+	return $links;
+}//end woohq_settings_link()
+
 function woohq_license_menu() {
 	add_submenu_page ( "options-general.php", "Bilahpro WooHQ", "Bilahpro WooHQ", "manage_options", "woohq", "woohq_license_page" );
 	//add_submenu_page( string $parent_slug, string $page_title, string $menu_title, string $capability, string $menu_slug, callable $function = '', int $position = null )
@@ -202,7 +220,7 @@ function woohq_admin_notices() {
 }
 add_action( 'admin_notices', 'woohq_admin_notices' );
 
-
+/*
 function woohq_check_license() {
 	$item_name = 'woohq';
 	$license = trim( get_option( 'woohq_license_key' ) );
@@ -233,3 +251,4 @@ function woohq_check_license() {
 
 add_action('admin_init', 'woohq_check_license');
 
+*/
