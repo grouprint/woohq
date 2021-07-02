@@ -1,4 +1,3 @@
-
 <?php 
 function woohq_adding_scripts() {
 	wp_register_script('woohq_script', plugins_url('woohq.js', __FILE__), array('jquery'), date("his") , true);

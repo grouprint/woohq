@@ -30,5 +30,3 @@ define( 'WOOHQ_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
  */
 include( WOOHQ_PLUGIN_PATH . 'admin/admin-init.php' ); 
 include( WOOHQ_PLUGIN_PATH . 'includes/price_check.php' ); 
-
-

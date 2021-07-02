@@ -71,5 +71,3 @@
         previous = this.value;
     });
 });
-
-        
