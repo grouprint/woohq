@@ -7,7 +7,7 @@
       var fmdata = $(".cart").serialize();
       var product = $("#product").val();
 
-      var url = 'https://manage.bilahpro.com/woohq?' + fmdata ;
+      var url = hostname + '/wp-json/woohq/getprice?' + fmdata ;
       $.post( url, function( response) {
           console.log(response);
           var data = response.data;
@@ -33,6 +33,7 @@
     $(".unit").on('focus', function () {
         previous = this.value;
     });
+
 
     $(".unit").change(function() {
       var width, height; 
