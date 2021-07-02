@@ -95,7 +95,7 @@ function woohq_activate_license() {
 		// Call the custom API.
 
 		//$response = wp_remote_post( 'https://webhook.site/2d6000f9-f186-4464-9847-39c8bab06136', array( 'timeout' => 15, 'sslverify' => false, 'body' => $api_params ) );
-		$response = wp_remote_post( URL_BILAHPRO, array( 'timeout' => 15, 'sslverify' => false, 'body' => $api_params ) );
+		$response = wp_remote_post( 'https://manage.bilahpro.com/woohq_license' , array( 'timeout' => 15, 'sslverify' => false, 'body' => $api_params ) );
 		// make sure the response came back okay
 		if ( is_wp_error( $response ) || 200 !== wp_remote_retrieve_response_code( $response ) ) {
 
@@ -213,7 +213,7 @@ function woohq_check_license() {
 		'url' => home_url()
 	);
 
-	$response = wp_remote_post( URL_BILAHPRO, array( 'body' => $api_params, 'timeout' => 15, 'sslverify' => false ) );
+	$response = wp_remote_post( 'https://manage.bilahpro.com/woohq_license', array( 'body' => $api_params, 'timeout' => 15, 'sslverify' => false ) );
   	if ( is_wp_error( $response ) ) {
 		return false;
   	}
