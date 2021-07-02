@@ -3,7 +3,7 @@ Contributors: Grouprint Solutions
 Tags: Bilahpro, Sticker Plugin, Grouprint, Printing Plugin
 Requires at least: 4.5
 Tested up to: 4.7.4
-Stable tag: 1.0.2
+Stable tag: 1.0.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
  
@@ -35,11 +35,17 @@ https://wordpress.org/plugins/woo-custom-product-addons/
  
 == Changelog ==
 
-= 1.0.1 =
+= 1.0.3 =
+* Include Namecard module
+
+= 1.0.3 =
+* Invalid character after plugin activation
+
+= 1.0.2 =
 * Redefined API URL
 
 = 1.0.1 =
 * Adding activation page
 
-= 1.0 =
+= 1.0.0 =
 * Initial release

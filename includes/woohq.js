@@ -1,20 +1,31 @@
  jQuery(function ($) {
 
     var price = 0;
+    var hostname = window.location.origin
 
    $(".cart").change(function() {
       var fmdata = $(".cart").serialize();
+      var product = $("#product").val();
+
       var url = 'https://manage.bilahpro.com/woohq?' + fmdata ;
-      $.get( url, function( response) {
+      $.post( url, function( response) {
+          console.log(response);
           var data = response.data;
           var price = Number(data.price).toFixed(2);
            $('#product_total_price .price').html( 'RM'+ price);
            $("#total_price").val(price);
+            
+          if(product == 'namecard') {
+            var preview = hostname + "/wp-content/plugins/woohq/assets/images/" + data.preview;
+            $('#paparan').attr("src", preview);
+          }
+
       },'json');
+      
       var harga = $("#total_price").val();
       var product_total = parseFloat(harga);
       $('#product_total_price .price').html( 'RM' + product_total.toFixed(2));
-      //console.log(harga);
+      
    });
 
     var previous;
