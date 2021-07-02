@@ -24,6 +24,7 @@ $woohq_plugin_version = '1.0.3';
 $plugin_file = plugin_basename(__FILE__);	
 define( 'WOOHQ_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
 define( 'WOOHQ_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
+define( 'WOOHQ_LICENSE_URL', 'https://manage.bilahpro.com/woohq_license' );
 
 /**
  * Includes - keeping it modular
