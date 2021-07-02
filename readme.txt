@@ -3,7 +3,7 @@ Contributors: Grouprint Solutions
 Tags: Bilahpro, Sticker Plugin, Grouprint, Printing Plugin
 Requires at least: 4.5
 Tested up to: 4.7.4
-Stable tag: 1.0.1
+Stable tag: 1.0.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
  
@@ -34,6 +34,12 @@ https://wordpress.org/plugins/woo-custom-product-addons/
 2. Add more screenshot labels as new line
  
 == Changelog ==
- 
+
+= 1.0.1 =
+* Redefined API URL
+
+= 1.0.1 =
+* Adding activation page
+
 = 1.0 =
 * Initial release
