@@ -22,7 +22,9 @@
  *            License URI: http://www.gnu.org/licenses/gpl-2.0.txt
  */
 
-define (URL_BILAHPRO, 'https://manage.bilahpro.com/woohq_license');
+if ( ! defined( 'URL_BILAHPRO' ) ) {
+	define (URL_BILAHPRO, 'https://manage.bilahpro.com/woohq_license');
+}
 
 include_once('includes/license.php');
 include_once('includes/price_check.php');

@@ -3,7 +3,7 @@ Contributors: Grouprint Solutions
 Tags: Bilahpro, Sticker Plugin, Grouprint, Printing Plugin
 Requires at least: 4.5
 Tested up to: 4.7.4
-Stable tag: 1.0.2
+Stable tag: 1.0.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
  
@@ -12,7 +12,12 @@ Bilahpro WooHQ Plugin for printing company
 == Description ==
  
 Bilahpro WooHQ Plugin for printing company
- 
+
+== Requirement ==
+Please download & install this plugin before. using WooHQ Plugin
+https://wordpress.org/plugins/woo-custom-product-addons/
+
+
 == Installation ==
 1. Unpack the `download-package`.
 2. Upload the file to the `/wp-content/plugins/` directory.
