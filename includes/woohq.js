@@ -6,10 +6,13 @@
    $(".cart").change(function() {
       var fmdata = $(".cart").serialize();
       var product = $("#product").val();
+      var pid = document.querySelector('.status-publish').getAttribute('id').replace("product-", "");
 
-      var url = hostname + '/wp-json/woohq/getprice?' + fmdata ;
+      var url = hostname + '/wp-json/woohq/getprice?pid=' + pid + '&' + fmdata ;
       $.post( url, function( response) {
           console.log(response);
+          //var debug = JSON.stringify(response);
+          //$(".debug").html(debug);
           var data = response.data;
           var price = Number(data.price).toFixed(2);
            $('#product_total_price .price').html( 'RM'+ price);
