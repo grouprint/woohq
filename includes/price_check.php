@@ -6,7 +6,7 @@ function woohq_adding_scripts() {
   
 add_action( 'wp_enqueue_scripts', 'woohq_adding_scripts' );
 
-remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_price', 10 );
+//remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_price', 10 );
 
 add_action( 'woocommerce_single_product_summary', 'woocommerce_total_product_price', 31 );
 function woocommerce_total_product_price() {
@@ -46,3 +46,11 @@ function before_calculate_totals( $cart_obj ) {
 		}
 	}
 }
+
+/*
+add_filter( 'woocommerce_get_price_html', 'amount', 100, 2 );
+function amount( $price, $product ){
+	
+    return '<div class="total_price"></div>';
+}
+*/

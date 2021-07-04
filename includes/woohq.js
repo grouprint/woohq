@@ -3,33 +3,15 @@
     var price = 0;
     var hostname = window.location.origin
 
-   $(".cart").change(function() {
-      var fmdata = $(".cart").serialize();
-      var product = $("#product").val();
-      var pid = document.querySelector('.status-publish').getAttribute('id').replace("product-", "");
+    var url = window.location.href;
+    if (url.includes("/product/")  ) {
+      calcPrice();
 
-      var url = hostname + '/wp-json/woohq/getprice?pid=' + pid + '&' + fmdata ;
-      $.post( url, function( response) {
-          console.log(response);
-          //var debug = JSON.stringify(response);
-          //$(".debug").html(debug);
-          var data = response.data;
-          var price = Number(data.price).toFixed(2);
-           $('#product_total_price .price').html( 'RM'+ price);
-           $("#total_price").val(price);
-            
-          if(product == 'namecard') {
-            var preview = hostname + "/wp-content/plugins/woohq/assets/images/" + data.preview;
-            $('#paparan').attr("src", preview);
-          }
+     $(".cart").change(function() {
+        calcPrice();
+     });
 
-      },'json');
-      
-      var harga = $("#total_price").val();
-      var product_total = parseFloat(harga);
-      $('#product_total_price .price').html( 'RM' + product_total.toFixed(2));
-      
-   });
+   }
 
     var previous;
 
@@ -85,4 +67,37 @@
         //console.log(previous, this.value);
         previous = this.value;
     });
+
+  function calcPrice(){
+    var price = 0;
+    var hostname = window.location.origin;
+    var fmdata = $(".cart").serialize();
+    var product = $("#product").val();
+    var pid = document.querySelector('.status-publish').getAttribute('id').replace("product-", "");
+    var url = hostname + '/wp-json/woohq/getprice?pid=' + pid + '&' + fmdata ;
+
+    $('.price').html( 'Please wait... Calculating in progress');
+
+    $.post( url, function( response) {
+        console.log(response);
+        //var debug = JSON.stringify(response);
+        //$(".debug").html(debug);
+        var data = response.data;
+        var price = Number(data.price).toFixed(2);
+         $('.price').html( 'RM'+ price);
+         $("#total_price").val(price);
+          
+        if(product == 'namecard') {
+          var preview = hostname + "/wp-content/plugins/woohq/assets/images/" + data.preview;
+          $('#paparan').attr("src", preview);
+        }
+
+    },'json');
+    
+    var harga = $("#total_price").val();
+    var product_total = parseFloat(harga);
+    $('.price').html( 'RM' + product_total.toFixed(2));
+  }
+
 });
+
