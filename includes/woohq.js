@@ -90,7 +90,22 @@
         if(product == 'namecard') {
           var preview = hostname + "/wp-content/plugins/woohq/assets/images/" + data.preview;
           $('#paparan').attr("src", preview);
+
+          var pricelist = data.pricelist;
+          $('.price_table').html( pricelist );
         }
+
+        if(product == 'sticker-sekolah') {
+          var preview = data.preview;
+          $('#paparan').attr("src", preview);
+        }
+
+        if(product == 'sticker-sekolah-pdf') {
+          var preview = data.preview;
+          $('#gpreview').attr("src", preview);
+        }
+
+        
 
     },'json');
     

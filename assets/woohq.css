@@ -1,0 +1,20 @@
+table.table_bilah td {
+	padding: 5px;
+}
+
+table.table_bilah th {
+	padding: 5px;
+	background-color: #ececec;
+}
+
+table.table_bilah {
+	border: 1px solid #ececec;
+}
+
+.hightlight {
+	background-color: #f6f8ff;
+}
+
+.select_price {
+	background-color: #ececec;
+}
