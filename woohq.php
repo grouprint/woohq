@@ -26,20 +26,6 @@ define( 'WOOHQ_LICENSE_URL', 'https://manage.bilahpro.com/woohq_license' );
 include( WOOHQ_PLUGIN_PATH . 'admin/admin-init.php' ); 
 include( WOOHQ_PLUGIN_PATH . 'includes/price_check.php' ); 
 
-// register jquery and style on initialization
-add_action('init', 'register_script');
-function register_script() {
-    wp_register_style( 'woohq', plugins_url('/assets/woohq.css', __FILE__), false, '1.0.0', 'all');
-}
-
-// use the registered jquery and style above
-add_action('wp_enqueue_scripts', 'enqueue_style');
-
-function enqueue_style(){
-   wp_enqueue_style( 'woohq' );
-}
-
-
 add_action( 'rest_api_init', 'woohq_api' );
 
 function woohq_api() {
