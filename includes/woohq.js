@@ -79,11 +79,12 @@
     $('.price').html( 'Please wait... Calculating in progress');
 
     $.post( url, function( response) {
-        console.log(response);
+       // console.log(response);
         //var debug = JSON.stringify(response);
         //$(".debug").html(debug);
         var data = response.data;
         var price = Number(data.price).toFixed(2);
+
          $('.price').html( 'RM'+ price);
          $("#total_price").val(price);
           
@@ -105,13 +106,22 @@
           $('#gpreview').attr("src", preview);
         }
 
+        if(product == 'sticker-kelas') {
+          var preview = data.preview;
+          $('#ref').val(data.ref);
+          $('#jumlah').val(data.jumlah);
+          $('#total_sticker').val(data.total_sticker);
+          $('#per_name').val(data.per_name);
+          $('#students').val(data.max);
+          $('#gpreview').attr("src", preview);
+        }
         
-
     },'json');
     
     var harga = $("#total_price").val();
     var product_total = parseFloat(harga);
     $('.price').html( 'RM' + product_total.toFixed(2));
+
   }
 
 });
