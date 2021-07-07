@@ -29,7 +29,7 @@ include( WOOHQ_PLUGIN_PATH . 'plugin-update-checker/plugin-update-checker.php' )
 $myUpdateChecker = Puc_v4_Factory::buildUpdateChecker(
 	'https://github.com/grouprint/woohq/',
 	__FILE__,
-	'woohq-plugin'
+	'woohq'
 );
 
 //Set the branch that contains the stable release.
