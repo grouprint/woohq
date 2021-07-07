@@ -17,7 +17,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-$woohq_plugin_version = '1.0.5';
 $plugin_file = plugin_basename(__FILE__);	
 define( 'WOOHQ_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
 define( 'WOOHQ_PLUGIN_URL', plugin_dir_url( __FILE__ ) );

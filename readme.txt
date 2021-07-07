@@ -17,7 +17,6 @@ Bilahpro WooHQ Plugin for printing company
 Please download & install this plugin before. using WooHQ Plugin
 https://wordpress.org/plugins/woo-custom-product-addons/
 
-
 == Installation ==
 1. Unpack the `download-package`.
 2. Upload the file to the `/wp-content/plugins/` directory.
@@ -35,7 +34,13 @@ https://wordpress.org/plugins/woo-custom-product-addons/
  
 == Changelog ==
 
-= 1.0.3 =
+= 1.0.6 =
+* Include Auto Updater
+
+= 1.0.5 =
+* Support Bilahpro Order management
+
+= 1.0.4 =
 * Include Namecard module
 
 = 1.0.3 =
