@@ -56,6 +56,12 @@ function woohq_api() {
             'callback' => 'get_item_meta',
         )
     );
+
+    register_rest_route( 'woohq', 'getListStatus', array(
+            'methods' => 'GET',
+            'callback' => 'get_list_status',
+        )
+    );
 }
 
 function get_price() {
@@ -90,6 +96,11 @@ function get_price() {
 if ( !function_exists( 'wc_get_order_item_meta' ) ) { 
     require_once '/includes/wc-order-item-functions.php'; 
 }
+
+function get_list_status(){
+	return wc_get_order_statuses();
+}
+
 function get_item_meta(){
 
 	$order_id = $_REQUEST['order_id'] ?? ''; 
