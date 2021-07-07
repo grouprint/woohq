@@ -25,14 +25,18 @@ define( 'WOOHQ_LICENSE_URL', 'https://manage.bilahpro.com/woohq_license' );
 
 include( WOOHQ_PLUGIN_PATH . 'admin/admin-init.php' ); 
 include( WOOHQ_PLUGIN_PATH . 'includes/price_check.php' ); 
-include( WOOHQ_PLUGIN_PATH . 'plugin-update-checker.php' ); 
+include( WOOHQ_PLUGIN_PATH . 'plugin-update-checker/plugin-update-checker.php' ); 
 
 $myUpdateChecker = Puc_v4_Factory::buildUpdateChecker(
-	'https://grouprint.my/plugin.json',
-	__FILE__, //Full path to the main plugin file or functions.php.
+	'https://github.com/grouprint/woohq/',
+	__FILE__,
 	'woohq-plugin'
 );
 
+//Set the branch that contains the stable release.
+$myUpdateChecker->setBranch('main');
+//Optional: If you're using a private repository, specify the access token like this:
+$myUpdateChecker->setAuthentication('your-token-here');
 
 add_filter( 'woocommerce_webhook_deliver_async', '__return_false' );
 

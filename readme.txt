@@ -3,7 +3,7 @@ Contributors: Grouprint Solutions
 Tags: Bilahpro, Sticker Plugin, Grouprint, Printing Plugin
 Requires at least: 4.5
 Tested up to: 4.7.4
-Stable tag: 1.0.3
+Stable tag: 1.0.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
  
