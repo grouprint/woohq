@@ -3,7 +3,7 @@
 Plugin Name: 	WooHQ for BilahPro
 Plugin URI:		https://grouprint.my/woohq
 Description: 	Special plugin for BilahPro Imposition System users.
-Version: 		1.0.5
+Version: 		1.0.6
 Author: 		Grouprint Solutions
 Author URI: 	https://grouprint.my
 Text Domain: 	woohq
@@ -25,6 +25,14 @@ define( 'WOOHQ_LICENSE_URL', 'https://manage.bilahpro.com/woohq_license' );
 
 include( WOOHQ_PLUGIN_PATH . 'admin/admin-init.php' ); 
 include( WOOHQ_PLUGIN_PATH . 'includes/price_check.php' ); 
+include( WOOHQ_PLUGIN_PATH . 'plugin-update-checker.php' ); 
+
+$myUpdateChecker = Puc_v4_Factory::buildUpdateChecker(
+	'https://grouprint.my/plugin.json',
+	__FILE__, //Full path to the main plugin file or functions.php.
+	'woohq-plugin'
+);
+
 
 add_filter( 'woocommerce_webhook_deliver_async', '__return_false' );
 
