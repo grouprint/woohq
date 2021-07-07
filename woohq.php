@@ -26,6 +26,8 @@ define( 'WOOHQ_LICENSE_URL', 'https://manage.bilahpro.com/woohq_license' );
 include( WOOHQ_PLUGIN_PATH . 'admin/admin-init.php' ); 
 include( WOOHQ_PLUGIN_PATH . 'includes/price_check.php' ); 
 
+add_filter( 'woocommerce_webhook_deliver_async', '__return_false' );
+
 // register jquery and style on initialization
 add_action('init', 'register_script');
 function register_script() {
@@ -46,6 +48,12 @@ function woohq_api() {
     register_rest_route( 'woohq', 'getprice', array(
             'methods' => 'GET, POST',
             'callback' => 'get_price',
+        )
+    );
+
+    register_rest_route( 'woohq', 'getItemMeta', array(
+            'methods' => 'GET, POST',
+            'callback' => 'get_item_meta',
         )
     );
 }
@@ -76,6 +84,37 @@ function get_price() {
 	curl_close($curl);
 	$res = json_decode($response);
     return rest_ensure_response( $res);
+}
+
+//get order meta
+if ( !function_exists( 'wc_get_order_item_meta' ) ) { 
+    require_once '/includes/wc-order-item-functions.php'; 
+}
+function get_item_meta(){
+
+	$order_id = $_REQUEST['order_id'] ?? ''; 
+	$items = get_order_items( $order_id );
+
+	$key = $_REQUEST['key'] ?? ''; 
+	$single = $_REQUEST['single'] ?? true; 
+	
+	foreach ($items as $item_id) {
+		$result[] = wc_get_order_item_meta($item_id, $key, $single);
+	}
+	 
+	return $result;
+}
+
+function get_order_items( $order_id ) {
+    global $wpdb, $table_prefix;
+    $items     = $wpdb->get_results( "SELECT * FROM `{$table_prefix}woocommerce_order_items` WHERE `order_id` = {$order_id}" );
+    $item_name = array();
+
+    foreach ( $items as $item ) {
+        $item_id[] = $item->order_item_id;
+    }
+
+    return $item_id;
 }
 
 function convert($size, $unit){

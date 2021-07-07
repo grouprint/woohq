@@ -79,7 +79,7 @@
     $('.price').html( 'Please wait... Calculating in progress');
 
     $.post( url, function( response) {
-       // console.log(response);
+        console.log(response);
         //var debug = JSON.stringify(response);
         //$(".debug").html(debug);
         var data = response.data;
@@ -89,6 +89,7 @@
          $("#total_price").val(price);
           
         if(product == 'namecard') {
+          $('#ref').val(data.ref);
           var preview = hostname + "/wp-content/plugins/woohq/assets/images/" + data.preview;
           $('#paparan').attr("src", preview);
 
@@ -98,11 +99,13 @@
 
         if(product == 'sticker-sekolah') {
           var preview = data.preview;
+          $('#ref').val(data.ref);
           $('#paparan').attr("src", preview);
         }
 
         if(product == 'sticker-sekolah-pdf') {
           var preview = data.preview;
+          $('#ref').val(data.ref);
           $('#gpreview').attr("src", preview);
         }
 
