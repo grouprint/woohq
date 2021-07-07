@@ -109,6 +109,13 @@
           $('#gpreview').attr("src", preview);
         }
 
+        if(product == 'sticker-sekolah-test') {
+          var preview = data.preview;
+          $('#ref').val(data.ref);
+          previewSticker(preview);
+          //$('.pdfemb-viewer').attr("src", preview);
+        }
+
         if(product == 'sticker-kelas') {
           var preview = data.preview;
           $('#ref').val(data.ref);
@@ -125,6 +132,36 @@
     var product_total = parseFloat(harga);
     $('.price').html( 'RM' + product_total.toFixed(2));
 
+  }
+
+  var pdfjsLib = window['pdfjs-dist/build/pdf'];
+  pdfjsLib.GlobalWorkerOptions.workerSrc = '/wp-content/plugins/woohq/includes/pdf.worker.js';
+
+  function previewSticker(url){
+    var loadingTask = pdfjsLib.getDocument(url);
+    loadingTask.promise.then(function(pdf) {
+
+      var pageNumber = 1;
+      pdf.getPage(pageNumber).then(function(page) {
+        
+        var scale = 1;
+        var viewport = page.getViewport({scale: scale});
+
+        // Prepare canvas using PDF page dimensions
+        var canvas = document.getElementById('gpreview');
+        var context = canvas.getContext('2d');
+        canvas.height = viewport.height;
+        canvas.width = viewport.width;
+
+        var renderContext = {
+          canvasContext: context,
+          viewport: viewport
+        };
+        var renderTask = page.render(renderContext);
+        renderTask.promise.then(function () {
+        });
+      });
+    });
   }
 
 });

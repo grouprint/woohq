@@ -1,10 +1,10 @@
 <?php 
 function woohq_adding_scripts() {
 	wp_register_script('woohq_script', plugins_url('woohq.js', __FILE__), array('jquery'), date("his") , true);
-	//wp_register_script('pdfobject_script', plugins_url('pdfobject.js', __FILE__), array('jquery'), date("his") , true);
+	wp_register_script('pdfobject_script', plugins_url('pdf.js', __FILE__), array('jquery'), date("his") , true);
 
 	wp_enqueue_script('woohq_script');
-	//wp_enqueue_script('pdfobject_script');
+	wp_enqueue_script('pdfobject_script');
 }
   
 add_action( 'wp_enqueue_scripts', 'woohq_adding_scripts' );
