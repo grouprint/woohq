@@ -104,7 +104,7 @@
         }
 
         if(product == 'sticker-sekolah-pdf') {
-          var preview = data.preview;
+          var preview = hostname + "/wp-content/plugins/woohq/web/viewer.html?file=" + data.preview;
           $('#ref').val(data.ref);
           $('#gpreview').attr("src", preview);
         }
@@ -117,7 +117,7 @@
         }
 
         if(product == 'sticker-kelas') {
-          var preview = data.preview;
+          var preview = hostname + "/wp-content/plugins/woohq/web/viewer.html?file=" + data.preview;
           $('#ref').val(data.ref);
           $('#jumlah').val(data.jumlah);
           $('#total_sticker').val(data.total_sticker);
