@@ -3,7 +3,7 @@
 Plugin Name: 	WooHQ for BilahPro
 Plugin URI:		https://grouprint.my/woohq
 Description: 	Special plugin for BilahPro Imposition System users.
-Version: 		1.0.8
+Version: 		1.0.9
 Author: 		Grouprint Solutions
 Author URI: 	https://grouprint.my
 Text Domain: 	woohq
@@ -79,6 +79,14 @@ function woohq_api() {
             'callback' => 'get_item_product',
         )
     );
+
+    register_rest_route( 'woohq', 'getUnicpo', array(
+            'methods' => 'GET',
+            'callback' => 'get_unicpo',
+        )
+    );
+
+    
 }
 
 function get_price() {
@@ -117,6 +125,7 @@ if ( !function_exists( 'wc_get_order_item_meta' ) ) {
 function get_list_status(){
 	return wc_get_order_statuses();
 }
+
 
 function get_item_product(){
 	$order_id = $_REQUEST['order_id'] ?? ''; 
@@ -190,9 +199,23 @@ function get_item_meta(){
 	return $result;
 }
 
+
 function get_order_items( $order_id ) {
     global $wpdb, $table_prefix;
     $items     = $wpdb->get_results( "SELECT * FROM `{$table_prefix}woocommerce_order_items` WHERE `order_id` = {$order_id}" );
+    $item_name = array();
+
+    foreach ( $items as $item ) {
+        $item_id[] = $item->order_item_id;
+    }
+
+    return $item_id;
+}
+
+
+function get_unicpo() {
+    global $wpdb, $table_prefix;
+    $items     = $wpdb->get_results( "SELECT * FROM `{$table_prefix}postmeta` WHERE `meta_key` = '_cpo_general " );
     $item_name = array();
 
     foreach ( $items as $item ) {
