@@ -3,7 +3,7 @@
 Plugin Name: 	WooHQ for BilahPro
 Plugin URI:		https://grouprint.my/woohq
 Description: 	Special plugin for BilahPro Imposition System users.
-Version: 		1.0.10
+Version: 		1.0.11
 Author: 		Grouprint Solutions
 Author URI: 	https://grouprint.my
 Text Domain: 	woohq
@@ -215,15 +215,18 @@ function get_order_items( $order_id ) {
 
 function get_unicpo() {
     global $wpdb, $table_prefix;
-    $items     = $wpdb->get_results( "SELECT * FROM `{$table_prefix}postmeta` WHERE `meta_key` = '_cpo_general " );
+    $items     = $wpdb->get_results( "SELECT * FROM `{$table_prefix}postmeta` WHERE `meta_key` = '_cpo_general' " );
+    
+    /*
     $item_name = array();
 
     foreach ( $items as $item ) {
         $item_id[] = $item->post_id;
         $item_value[] = $item->meta_value;
     }
+	*/
 
-    return array($item_id => $item_value);
+    return $items;
 }
 
 function convert($size, $unit){
