@@ -3,7 +3,7 @@
 Plugin Name: 	WooHQ for BilahPro
 Plugin URI:		https://grouprint.my/woohq
 Description: 	Special plugin for BilahPro Imposition System users.
-Version: 		1.0.11
+Version: 		1.0.12
 Author: 		Grouprint Solutions
 Author URI: 	https://grouprint.my
 Text Domain: 	woohq
@@ -212,21 +212,37 @@ function get_order_items( $order_id ) {
     return $item_id;
 }
 
-
-function get_unicpo() {
+function get_meta_data( $item_id ) {
     global $wpdb, $table_prefix;
-    $items     = $wpdb->get_results( "SELECT * FROM `{$table_prefix}postmeta` WHERE `meta_key` = '_cpo_general' " );
-    
+    $items     = $wpdb->get_results( "SELECT * FROM `{$table_prefix}woocommerce_order_itemmeta` WHERE `order_item_id` = {$item_id}" );
     /*
     $item_name = array();
 
     foreach ( $items as $item ) {
-        $item_id[] = $item->post_id;
-        $item_value[] = $item->meta_value;
+        $item_id[] = $item->order_item_id;
     }
 	*/
-
     return $items;
+}
+
+function get_unicpo( ) {
+    global $wpdb, $table_prefix;
+
+    $order_id = $_REQUEST['order_id'] ?? ''; 
+
+    $item_id = get_order_items( $order_id );
+        
+    foreach ( $item_id as $item ) {
+       $order_item_meta[] = get_meta_data( $item );
+    }
+
+	
+	//$order_item_id =  $my_order->order_item_id; 
+
+    //$items     = $wpdb->get_results( "SELECT * FROM `{$table_prefix}postmeta` WHERE `meta_key` = '_cpo_general' " );
+    
+
+    return $order_item_meta;
 }
 
 function convert($size, $unit){
