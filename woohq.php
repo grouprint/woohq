@@ -78,15 +78,7 @@ function woohq_api() {
             'methods' => 'GET, POST',
             'callback' => 'get_item_product',
         )
-    );
-
-    register_rest_route( 'woohq', 'getUnicpo', array(
-            'methods' => 'GET, POST',
-            'callback' => 'get_unicpo',
-        )
-    );
-
-    
+    );    
 }
 
 function get_price() {
@@ -210,26 +202,6 @@ function get_order_items( $order_id ) {
     }
 
     return $item_id;
-}
-
-function get_meta_data( $item_id ) {
-    global $wpdb, $table_prefix;
-    $items     = $wpdb->get_results( "SELECT * FROM `{$table_prefix}woocommerce_order_itemmeta` WHERE `order_item_id` = {$item_id}" );
-    return $items;
-}
-
-function get_unicpo( ) {
-    global $wpdb, $table_prefix;
-
-    $items     = $wpdb->get_results( "SELECT * FROM `{$table_prefix}postmeta` WHERE `meta_key` = '_cpo_general' " );
-
-    foreach ( $items as $item ) {
-        $meta_value = unserialize($item->meta_value);
-
-        $cpo_label = $meta_value['advanced']
-    }
-
-    return $order_item_meta;
 }
 
 function convert($size, $unit){
