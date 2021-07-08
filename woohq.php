@@ -3,7 +3,7 @@
 Plugin Name: 	WooHQ for BilahPro
 Plugin URI:		https://grouprint.my/woohq
 Description: 	Special plugin for BilahPro Imposition System users.
-Version: 		1.0.13
+Version: 		1.0.14
 Author: 		Grouprint Solutions
 Author URI: 	https://grouprint.my
 Text Domain: 	woohq
