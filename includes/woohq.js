@@ -64,6 +64,20 @@
             $(".height").val(height.toFixed(2));
        }
 
+       if(previous == 'in' && this.value == 'ft'){
+            width = $(".width").val() / 12;
+            height= $(".height").val() / 12;
+            $(".width").val(width.toFixed(2));
+            $(".height").val(height.toFixed(2));
+       }
+
+       if(previous == 'ft' && this.value == 'in'){
+            width = $(".width").val() * 12;
+            height= $(".height").val() * 12;
+            $(".width").val(width.toFixed(2));
+            $(".height").val(height.toFixed(2));
+       }
+
         //console.log(previous, this.value);
         previous = this.value;
     });
@@ -103,7 +117,7 @@
           $('#paparan').attr("src", preview);
         }
 
-        if(product == 'sticker-sekolah-pdf') {
+        if(product == 'sticker-sekolah-pdf'  || product == 'bunting') {
           var preview = hostname + "/wp-content/plugins/woohq/web/viewer.html?file=" + data.preview;
           $('#ref').val(data.ref);
           $('#gpreview').attr("src", preview);
