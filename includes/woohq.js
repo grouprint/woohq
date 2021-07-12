@@ -124,8 +124,9 @@
           }
 
           if(product == 'bunting') {
+            var dt = new Date(); 
             var preview = hostname + "/wp-content/plugins/woohq/web/viewer.html?file=" + data.preview;
-            var display = hostname + "/wp-content/plugins/woohq/assets/images/" + data.display;
+            var display = hostname + "/wp-content/plugins/woohq/assets/images/" + data.display + '?dt=' + dt.getTime();
             $('#ref').val(data.ref);
             $('#gpreview').attr("src", preview);
             $('.wp-post-image').attr("src", display);
