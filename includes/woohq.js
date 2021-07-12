@@ -124,14 +124,10 @@
           }
 
           if(product == 'bunting') {
-            var dt = new Date(); 
-
             var preview = hostname + "/wp-content/plugins/woohq/web/viewer.html?file=" + data.preview;
-            var display = hostname + "/wp-content/plugins/woohq/assets/images/" + data.display + '?dt=' + dt.getTime();
+            var display = hostname + "/wp-content/plugins/woohq/assets/images/" + data.display;
             $('#ref').val(data.ref);
             $('#gpreview').attr("src", preview);
-            $('.wp-post-image').removeAttr('data-srcset');​ // Remove the src
-            $('.wp-post-image').removeAttr('srcset');​ // Remove the src
             $('.wp-post-image').attr("src", display);
 
             var list_machine = data.list_machine;
