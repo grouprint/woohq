@@ -34,6 +34,9 @@ https://wordpress.org/plugins/woo-custom-product-addons/
  
 == Changelog ==
 
+= 1.0.17 =
+* Bug fixed, corect display if plugin is not activate
+
 = 1.0.16 =
 * Split js file
 

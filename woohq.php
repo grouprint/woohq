@@ -3,7 +3,7 @@
 Plugin Name: 	WooHQ for BilahPro
 Plugin URI:		https://grouprint.my/woohq
 Description: 	Special plugin for BilahPro Imposition System users.
-Version: 		1.0.16
+Version: 		1.0.17
 Author: 		Grouprint Solutions
 Author URI: 	https://grouprint.my
 Text Domain: 	woohq
@@ -83,29 +83,35 @@ function woohq_api() {
 
 function get_price() {
 	
-	$token = get_option( 'woohq_license_key' );
-	$api_url = 'https://manage.bilahpro.com/api/getPrice';
-	$curl = curl_init();
-	$headers = array(
-	   "Accept: application/json",
-	   "Authorization: Bearer " . $token,
-	);
-	curl_setopt_array($curl, array(
-	  CURLOPT_URL => 'https://manage.bilahpro.com/api/getPrice',
-	  CURLOPT_RETURNTRANSFER => true,
-	  CURLOPT_ENCODING => '',
-	  CURLOPT_MAXREDIRS => 10,
-	  CURLOPT_TIMEOUT => 0,
-	  CURLOPT_FOLLOWLOCATION => true,
-	  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-	  CURLOPT_CUSTOMREQUEST => 'POST',
-	  CURLOPT_POSTFIELDS => http_build_query($_REQUEST),
-	  CURLOPT_HTTPHEADER => $headers,
-	));
+	if($_REQUEST['wcpa_field_key_checker']) {
+		$token = get_option( 'woohq_license_key' );
+		$api_url = 'https://manage.bilahpro.com/api/getPrice';
+		$curl = curl_init();
+		$headers = array(
+		   "Accept: application/json",
+		   "Authorization: Bearer " . $token,
+		);
+		curl_setopt_array($curl, array(
+		  CURLOPT_URL => 'https://manage.bilahpro.com/api/getPrice',
+		  CURLOPT_RETURNTRANSFER => true,
+		  CURLOPT_ENCODING => '',
+		  CURLOPT_MAXREDIRS => 10,
+		  CURLOPT_TIMEOUT => 0,
+		  CURLOPT_FOLLOWLOCATION => true,
+		  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+		  CURLOPT_CUSTOMREQUEST => 'POST',
+		  CURLOPT_POSTFIELDS => http_build_query($_REQUEST),
+		  CURLOPT_HTTPHEADER => $headers,
+		));
 
-	$response = curl_exec($curl);
-	curl_close($curl);
-	$res = json_decode($response);
+		$response = curl_exec($curl);
+		curl_close($curl);
+		$res = json_decode($response);
+	} else {
+		$data = array("post" => $_REQUEST);
+		$res = array("success" => false, "message" => "invalid woohq", "data" => $data);
+	}
+		
     return rest_ensure_response( $res);
 }
 

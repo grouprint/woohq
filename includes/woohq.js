@@ -90,61 +90,117 @@
     var pid = document.querySelector('.status-publish').getAttribute('id').replace("product-", "");
     var url = hostname + '/wp-json/woohq/getprice?pid=' + pid + '&' + fmdata ;
 
-    $('.price').html( 'Please wait... Calculating in progress');
-
     $.post( url, function( response) {
         console.log(response);
-        //var debug = JSON.stringify(response);
-        //$(".debug").html(debug);
+
         var data = response.data;
-        var price = Number(data.price).toFixed(2);
+        var post = data.post;
 
-         $('.price').html( 'RM'+ price);
-         $("#total_price").val(price);
-          
-        if(product == 'namecard') {
-          $('#ref').val(data.ref);
-          var preview = hostname + "/wp-content/plugins/woohq/assets/images/" + data.preview;
-          $('#paparan').attr("src", preview);
+        if(post.wcpa_field_key_checker) {
+          var price = Number(data.price).toFixed(2);
 
-          var pricelist = data.pricelist;
-          $('.price_table').html( pricelist );
-        }
+           $('.price').html( 'RM'+ price);
+           $("#total_price").val(price);
+            
+          if(product == 'namecard') {
+            $('#ref').val(data.ref);
+            var preview = hostname + "/wp-content/plugins/woohq/assets/images/" + data.preview;
+            $('#paparan').attr("src", preview);
 
-        if(product == 'sticker-sekolah') {
-          var preview = data.preview;
-          $('#ref').val(data.ref);
-          $('#paparan').attr("src", preview);
-        }
+            var pricelist = data.pricelist;
+            $('.price_table').html( pricelist );
+          }
 
-        if(product == 'sticker-sekolah-pdf'  || product == 'bunting') {
-          var preview = hostname + "/wp-content/plugins/woohq/web/viewer.html?file=" + data.preview;
-          $('#ref').val(data.ref);
-          $('#gpreview').attr("src", preview);
-        }
+          if(product == 'sticker-sekolah') {
+            var preview = data.preview;
+            $('#ref').val(data.ref);
+            $('#paparan').attr("src", preview);
+          }
 
-        if(product == 'sticker-sekolah-test') {
-          var preview = data.preview;
-          $('#ref').val(data.ref);
-          previewSticker(preview);
-          //$('.pdfemb-viewer').attr("src", preview);
-        }
+          if(product == 'sticker-sekolah-pdf') {
+            var preview = hostname + "/wp-content/plugins/woohq/web/viewer.html?file=" + data.preview;
+            $('#ref').val(data.ref);
+            $('#gpreview').attr("src", preview);
+          }
 
-        if(product == 'sticker-kelas') {
-          var preview = hostname + "/wp-content/plugins/woohq/web/viewer.html?file=" + data.preview;
-          $('#ref').val(data.ref);
-          $('#jumlah').val(data.jumlah);
-          $('#total_sticker').val(data.total_sticker);
-          $('#per_name').val(data.per_name);
-          $('#students').val(data.max);
-          $('#gpreview').attr("src", preview);
-        }
+          if(product == 'bunting') {
+            var preview = hostname + "/wp-content/plugins/woohq/web/viewer.html?file=" + data.preview;
+            $('#ref').val(data.ref);
+            $('#gpreview').attr("src", preview);
+
+            var list_machine = data.list_machine;
+            var list_material = data.list_material;
+            var list_hanger = data.list_hanger;
+            var list_stand = data.list_stand;
+
+            var posto = data.post;
+            buildList('material', list_material, posto.material);
+            buildList('machine', list_machine, posto.machine);
+            buildList('hanger', list_hanger, posto.hanger);
+            buildList('stand', list_stand, posto.stand);
+
+            function buildList(target, dat, posto) {
+                var $el = $('.'+ target);
+                $el.empty(); // remove old options
+                $.each(dat, function(key, value) {
+                  $el.append($("<option></option>")
+                     .attr("value", key).text(value));
+                });
+
+                $el.val(posto);
+            }
+            
+            /*
+            var $el = $(".material");
+            $el.empty(); // remove old options
+            $.each(list_material, function(key, value) {
+              $el.append($("<option></option>")
+                 .attr("value", key).text(value));
+            });
+
+            var $el = $(".machine");
+            $el.empty(); // remove old options
+            $.each(list_machine, function(key, value) {
+              $el.append($("<option></option>")
+                 .attr("value", key).text(value));
+            });
+            */
+
+          }
+
+
+          if(product == 'sticker-sekolah-test') {
+            var preview = data.preview;
+            $('#ref').val(data.ref);
+            previewSticker(preview);
+            //$('.pdfemb-viewer').attr("src", preview);
+          }
+
+          if(product == 'sticker-kelas') {
+            var preview = hostname + "/wp-content/plugins/woohq/web/viewer.html?file=" + data.preview;
+            $('#ref').val(data.ref);
+            $('#jumlah').val(data.jumlah);
+            $('#total_sticker').val(data.total_sticker);
+            $('#per_name').val(data.per_name);
+            $('#students').val(data.max);
+            $('#gpreview').attr("src", preview);
+          }
         
+          var harga = $("#total_price").val();
+          var product_total = parseFloat(harga);
+          $('.price').html( 'RM' + product_total.toFixed(2));
+
+
+        } else {
+          //do nothing
+        }
+
+
+        
+
     },'json');
     
-    var harga = $("#total_price").val();
-    var product_total = parseFloat(harga);
-    $('.price').html( 'RM' + product_total.toFixed(2));
+    
 
   }
 
