@@ -125,8 +125,10 @@
 
           if(product == 'bunting') {
             var preview = hostname + "/wp-content/plugins/woohq/web/viewer.html?file=" + data.preview;
+            var display = hostname + "/wp-content/plugins/woohq/assets/images/" + data.display;
             $('#ref').val(data.ref);
             $('#gpreview').attr("src", preview);
+            $('.wp-post-image').attr("src", display);
 
             var list_machine = data.list_machine;
             var list_material = data.list_material;
@@ -149,22 +151,6 @@
 
                 $el.val(posto);
             }
-            
-            /*
-            var $el = $(".material");
-            $el.empty(); // remove old options
-            $.each(list_material, function(key, value) {
-              $el.append($("<option></option>")
-                 .attr("value", key).text(value));
-            });
-
-            var $el = $(".machine");
-            $el.empty(); // remove old options
-            $.each(list_machine, function(key, value) {
-              $el.append($("<option></option>")
-                 .attr("value", key).text(value));
-            });
-            */
 
           }
 
